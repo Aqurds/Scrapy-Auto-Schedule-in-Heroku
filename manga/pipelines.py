@@ -21,7 +21,7 @@ class MangaPipeline(object):
         self.connection = pymongo.MongoClient("ds249035.mlab.com", 49035)
         db = self.connection["aqurds"]
         db.authenticate("user", "2252010baby")
-        self.collection = db['heroku_test']
+        self.collection = db['heroku_test_manga_details']
 
     def process_item(self, item, spider):
         self.collection.insert(dict(item))
