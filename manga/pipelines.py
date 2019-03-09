@@ -21,7 +21,7 @@ class MangaPipeline(object):
         self.connection = pymongo.MongoClient("ds159785-a0.mlab.com", 59785)
         db = self.connection["mangastuff"]
         db.authenticate("user", "2252010baby")
-        self.collection = db['manga_each_chapter_image_list_with_manga_id']
+        self.collection = db['genres_categories']
 
     def process_item(self, item, spider):
         self.collection.insert(dict(item))
