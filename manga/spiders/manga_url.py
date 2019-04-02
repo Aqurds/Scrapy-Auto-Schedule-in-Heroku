@@ -10,11 +10,13 @@ from ..items import MangaId
 class my_first_scrapy(scrapy.Spider):
     name = 'manganame'
     start_urls = [
-        'https://mangarock.herokuapp.com/manga_list?type=latest&category=all&state=all&page=%s' % page for page in range(1,3)
+        'https://mangarock.herokuapp.com/manga_list?type=latest&category=all&state=all&page=%s' % page for page in range(1,11)
     ]
-    #json_file_name = 'manga_name.json'
-    #if os.path.exists(json_file_name):
-    #    os.remove(json_file_name)
+
+    # DELETE the existing manga_name.json file and store the new data in a new manga_name.json file
+    # json_file_name = 'manga_name.json'
+    # if os.path.exists(json_file_name):
+    #     os.remove(json_file_name)
 
     def parse(self, response):
 

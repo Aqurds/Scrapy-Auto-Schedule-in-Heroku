@@ -12,16 +12,17 @@ class my_first_scrapy(scrapy.Spider):
     start_urls = ['https://mangarock.herokuapp.com/']
 
 
+
     def parse(self, response):
 
         genres_categories = GenresCategories()
 
 
-        genres_categories['genres'] = response.xpath('//ul[@class="tags tag-name"]/li/a/text()').extract()
+        # genres_categories['genres'] = response.xpath('//ul[@class="tags tag-name"]/li/a/text()').extract()
+        genres_categories['genres'] = response.xpath('//div[@class="panel-category"]/table/tbody/tr/td/a/text()').extract()
 
 
-
-        genres_categories['categories'] = response.xpath('//ul[@class="tags spec-tag"]/li/a/text()').extract()
+        # genres_categories['categories'] = response.xpath('//ul[@class="tags spec-tag"]/li/a/text()').extract()
 
 
 

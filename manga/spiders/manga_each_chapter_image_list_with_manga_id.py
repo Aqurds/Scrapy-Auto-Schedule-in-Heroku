@@ -1,5 +1,7 @@
+import os
 import scrapy
 import json
+import pymongo
 from ..items import MangaEachChapterImageListWithMangaId
 
 
@@ -10,20 +12,19 @@ class my_first_scrapy(scrapy.Spider):
     name = 'manga_each_chapter_image_list_with_manga_id'
 
     start_urls = []
-    # chapter_id_dict = ''
-    #
-    # with open('manga_chapter_list.json', 'r') as f:
-    #     chapter_id_dict = json.load(f)
+    
 
-    # for item in chapter_id_dict:
-    #     for chapter_url in item['full_chapter_url']:
-    #         start_urls.append(chapter_url)
 
-    # # write the chapter list in a text file
-    # with open('manga_chapter.txt', 'w') as f:
-    #     for item in chapter_id_dict:
-    #         for chapter_url in item['full_chapter_url']:
-    #             f.write("'%s',\n" % chapter_url)
+    connection = pymongo.MongoClient("ds159785-a0.mlab.com", 59785)
+    db = connection["mangastuff"]
+    db.authenticate("user", "2252010baby")
+    manga_link = db['manga_chapter_updater_list'].find()
+
+    for item in manga_link:
+        for url in item['full_chapter_url']:
+            start_urls.append(url)
+
+
 
     def parse(self, response):
 

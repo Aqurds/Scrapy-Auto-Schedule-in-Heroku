@@ -83,4 +83,4 @@ class UpdateSpider(scrapy.Item):
 # This spider will genres & categories
 class GenresCategories(scrapy.Item):
     genres = scrapy.Field()
-    categories = scrapy.Field()
+    # categories = scrapy.Field()

@@ -1,5 +1,6 @@
 import scrapy
 import json
+import pymongo
 from ..items import UpdateSpider
 
 
@@ -8,9 +9,13 @@ from ..items import UpdateSpider
 # This spider will collect regularly all update manga id from front page
 class my_first_scrapy(scrapy.Spider):
     name = 'update_spider'
-
     start_urls = ['https://mangarock.herokuapp.com/']
 
+
+    connection = pymongo.MongoClient("ds159785-a0.mlab.com", 59785)
+    db = connection["mangastuff"]
+    db.authenticate("user", "2252010baby")
+    db['update_spider'].remove({})
 
     def parse(self, response):
 
@@ -40,4 +45,4 @@ class my_first_scrapy(scrapy.Spider):
 
         yield update
 
-# Create update_spider.json file
+# Store the front page updated manga id in update_spider collection in mLab

@@ -19,10 +19,26 @@ class MangaPipeline(object):
         # self.collection = db['manga_collection']
 
         self.connection = pymongo.MongoClient("ds159785-a0.mlab.com", 59785)
-        db = self.connection["mangastuff"]
-        db.authenticate("user", "2252010baby")
-        self.collection = db['update_spider']
+        self.db = self.connection["mangastuff"]
+        self.db.authenticate("user", "2252010baby")
+        # self.collection = db['test_auto_scraping']
 
     def process_item(self, item, spider):
-        self.collection.insert(dict(item))
+		# self.collection = db['test_auto_scraping']
+        # self.collection.insert(dict(item))
+        if spider.name == 'manganame':
+             self.db['manga_name_updater_list'].insert(dict(item))
+             return item
+        if spider.name == 'manga_details':
+             self.db['all_manga_details'].insert(dict(item))
+             return item
+        if spider.name == 'manga_chapter_list':
+             self.db['manga_chapter_updater_list'].insert(dict(item))
+             return item
+        if spider.name == 'manga_each_chapter_image_list_with_manga_id':
+             self.db['manga_each_chapter_image_list_with_manga_id'].insert(dict(item))
+             return item
+        if spider.name == 'update_spider':
+             self.db['update_spider'].insert(dict(item))
+             return item
         return item
