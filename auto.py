@@ -5,9 +5,9 @@ import pymongo
 import json
 
 # making connection with mLab for updating the document
-connection = pymongo.MongoClient("ds159785-a0.mlab.com", 59785)
-db = connection["mangastuff"]
-db.authenticate("user", "2252010baby")
+connection = pymongo.MongoClient("uri", urinumber)
+db = connection["db"]
+db.authenticate("username", "password")
 
 
 # function for running all spiders
@@ -62,9 +62,9 @@ def update_document():
 
 # function for deleting old documents from the collection so the spiders will always work with new updated content
 def delete_previous_document():
-    connection = pymongo.MongoClient("ds159785-a0.mlab.com", 59785)
-    db = connection["mangastuff"]
-    db.authenticate("user", "2252010baby")
+    connection = pymongo.MongoClient("uri", urinumber)
+    db = connection["db"]
+    db.authenticate("username", "password")
     db['manga_name_updater_list'].remove({})
     db['manga_chapter_updater_list'].remove({})
 
